@@ -43,7 +43,8 @@ up () {
 alias h='history'
 alias c='clear'
 # running custom scripts form c/Users/fucitol/bin
-alias gp='bash gp.sh'
+alias gp='gp.sh'
+alias as='as.sh'
 
 
 # Run the LinuxPenguin function on shell startup   
