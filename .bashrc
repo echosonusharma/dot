@@ -9,7 +9,8 @@ esac
 # append to the history file, don't overwrite it
 shopt -s histappend
 
-HISTCONTROL=ignoredups
+# don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
 HISTTIMEFORMAT="%F %T "
 
 # To set the number of lines in active history and to set the number of lines saved in Bash history
@@ -39,6 +40,9 @@ up () {
 # simple alias
 alias h='history'
 alias c='clear'
+
+# run fade script for ascii art
+fade
 
 ### SETTING THE STARSHIP PROMPT ###
 eval "$(starship init bash)"
