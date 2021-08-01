@@ -1,17 +1,3 @@
-LinuxPenguin(){
-green="\e[0;92m"
-bold="\e[1m"
-reset="\e[0m"
-
-echo  -e "${green} ${bold}     .--.     ${reset} "
-echo  -e "${green} ${bold}    |o_o |    ${reset} "
-echo  -e "${green} ${bold}    |:_/ |    ${reset} "
-echo  -e "${green} ${bold}   //   \ \   ${reset} "
-echo  -e "${green} ${bold}  (|     | )  ${reset} " 
-echo  -e "${green} ${bold} /:\_   _/:\  ${reset} "
-echo  -e "${green} ${bold} \___)=(___/  ${reset} "
-}
-
 # ~/.bashrc
 
 # If not running interactively, don't do anything
@@ -53,9 +39,6 @@ up () {
 # simple alias
 alias h='history'
 alias c='clear'
-
-# Run the LinuxPenguin function on shell startup   
-LinuxPenguin
 
 ### SETTING THE STARSHIP PROMPT ###
 eval "$(starship init bash)"
