@@ -12,6 +12,17 @@ echo  -e "${green} ${bold} /:\_   _/:\  ${reset} "
 echo  -e "${green} ${bold} \___)=(___/  ${reset} "
 }
 
+# ~/.bashrc
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
 HISTCONTROL=ignoredups
 HISTTIMEFORMAT="%F %T "
 
