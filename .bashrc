@@ -69,6 +69,16 @@ ex (){
 alias h='history'
 alias c='clear'
 
+### GIT ALIASES
+alias gl='git log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
+alias gsn='git switch -C'
+alias gs='git switch'
+alias gb='git branch'
+alias gr='git remote'
+alias gpl='git pull'
+alias gc='git clone'
+alias gs='git status'
+
 # RUN FADE SCRIPT
 fade
 
