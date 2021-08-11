@@ -83,6 +83,17 @@ alias gf='git fetch'
 alias gm='git merge'
 alias gma='git merge --abort'
 
+### NPM ALIASES
+alias nit='npm init'
+alias ni='npm install'
+alias nu='npm uninstall'
+
+### YARN ALIASES
+alias yit='yarn init'
+alias yi='yarn install'
+alias ya='yarn add'
+alias yr='yarn remove'
+
 # RUN FADE SCRIPT
 fade
 
