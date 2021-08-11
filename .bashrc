@@ -78,8 +78,10 @@ alias gr='git remote'
 alias gpl='git pull'
 alias gc='git clone'
 alias gs='git status'
-alias gc='git checkout'
+alias gck='git checkout'
 alias gf='git fetch'
+alias gm='git merge'
+alias gma='git merge --abort'
 
 # RUN FADE SCRIPT
 fade
