@@ -71,8 +71,7 @@ alias c='clear'
 
 ### GIT ALIASES
 alias gl='git log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
-alias gsn='git switch -C'
-alias gs='git switch'
+alias gsw='git switch'
 alias gb='git branch'
 alias gr='git remote'
 alias gpl='git pull'
@@ -87,6 +86,7 @@ alias gma='git merge --abort'
 alias nit='npm init'
 alias ni='npm install'
 alias nu='npm uninstall'
+alias nr='npm run'
 
 ### YARN ALIASES
 alias yit='yarn init'
