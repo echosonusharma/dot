@@ -82,6 +82,11 @@ alias gf='git fetch'
 alias gm='git merge'
 alias gma='git merge --abort'
 
+## GIT WORKTREE
+alias gbc='git clone --bare'
+alias gwa='git worktree add'
+alias gwr='git worktree remove'
+
 ### NPM ALIASES
 alias nit='npm init'
 alias ni='npm install'
