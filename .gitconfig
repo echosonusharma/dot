@@ -1,0 +1,15 @@
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[user]
+	name = sonu sharma
+	email = echosonusharma@gmail.com
+[core]
+	editor = code --wait
+	autocrlf = true
+	compression = 9
+	longpaths = true
+[pack]
+	windowsMemory = 256m
