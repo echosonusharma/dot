@@ -99,6 +99,13 @@ alias yi='yarn install'
 alias ya='yarn add'
 alias yr='yarn remove'
 
+### CARGO ALIASES
+
+alias cn='cargo new'
+alias cr='cargo run'
+alias ct='cargo test'
+alias cr='cargo build'
+
 # RUN FADE SCRIPT
 fade
 
