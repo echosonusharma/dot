@@ -104,7 +104,7 @@ alias yr='yarn remove'
 alias cn='cargo new'
 alias cr='cargo run'
 alias ct='cargo test'
-alias cr='cargo build'
+alias cb='cargo build'
 
 # RUN FADE SCRIPT
 fade
