@@ -13,3 +13,5 @@
 	longpaths = true
 [pack]
 	windowsMemory = 256m
+[init]
+	defaultBranch = master

@@ -68,6 +68,7 @@ ex (){
 
 alias h='history'
 alias c='clear'
+alias ll='ls -la'
 
 ### GIT ALIASES
 alias gl='git log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
@@ -105,6 +106,9 @@ alias cn='cargo new'
 alias cr='cargo run'
 alias ct='cargo test'
 alias cb='cargo build'
+
+# cargo watch must be installed
+alias cw='cargo watch -x run'
 
 # RUN FADE SCRIPT
 fade
