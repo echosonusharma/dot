@@ -1,3 +1,3 @@
-## dot files
+# Dot files
 
-all dot files and settings
+all of my dot files
