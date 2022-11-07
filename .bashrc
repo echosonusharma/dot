@@ -65,6 +65,7 @@ ex (){
 
 
 ### BASH ALIASES
+alias rs='exec $0'
 alias h='history'
 alias c='clear'
 alias ll='ls -la'
@@ -78,8 +79,8 @@ alias gr='git remote'
 alias gpl='git pull'
 alias gc='git clone'
 alias gs='git status'
-alias gw ='git worktree'
-alias gc='git checkout'
+alias gw='git worktree'
+alias gck='git checkout'
 alias gf='git fetch'
 alias gm='git merge'
 
