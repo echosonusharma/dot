@@ -64,29 +64,24 @@ ex (){
 }
 
 
-### ALIASES
-
+### BASH ALIASES
 alias h='history'
 alias c='clear'
 alias ll='ls -la'
+alias grep='grep --color=auto'
 
 ### GIT ALIASES
 alias gl='git log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
-alias gsw='git switch'
+alias gs='git switch'
 alias gb='git branch'
 alias gr='git remote'
 alias gpl='git pull'
 alias gc='git clone'
 alias gs='git status'
-alias gck='git checkout'
+alias gw ='git worktree'
+alias gc='git checkout'
 alias gf='git fetch'
 alias gm='git merge'
-alias gma='git merge --abort'
-
-## GIT WORKTREE
-alias gbc='git clone --bare'
-alias gwa='git worktree add'
-alias gwr='git worktree remove'
 
 ### NPM ALIASES
 alias nit='npm init'
@@ -101,7 +96,6 @@ alias ya='yarn add'
 alias yr='yarn remove'
 
 ### CARGO ALIASES
-
 alias cn='cargo new'
 alias cr='cargo run'
 alias ct='cargo test'
