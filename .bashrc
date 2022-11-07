@@ -73,16 +73,16 @@ alias grep='grep --color=auto'
 
 ### GIT ALIASES
 alias gl='git log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
-alias gs='git switch'
 alias gb='git branch'
 alias gr='git remote'
-alias gpl='git pull'
 alias gc='git clone'
 alias gs='git status'
 alias gw='git worktree'
-alias gck='git checkout'
-alias gf='git fetch'
 alias gm='git merge'
+alias gf='git fetch'
+alias gck='git checkout'
+alias gsw='git switch'
+alias gpl='git pull'
 
 ### NPM ALIASES
 alias nit='npm init'
