@@ -1,3 +1,3 @@
-# Dot files
+# Dot files ⚙️
 
-all of my dot files
+repo to keep all my dot files
