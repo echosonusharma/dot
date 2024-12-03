@@ -63,6 +63,14 @@ ex (){
   fi
 }
 
+# if a tmux session exists then attach to that or create a new one
+if ! command -v tmux >/dev/null 2>&1; then
+  echo "tmux is not installed."
+else
+  if [ -z "$TMUX" ]; then
+    tmux attach-session -t $(tmux ls | awk '{print substr($1, 1, 1)}') || tmux new-session
+  fi
+fi
 
 ### BASH ALIASES
 alias rs='exec $0'
@@ -106,7 +114,7 @@ alias cb='cargo build'
 alias cw='cargo watch -x run'
 
 # RUN FADE SCRIPT
-fade
+sh ~/fade
 
 ### SETTING THE STARSHIP PROMPT 
 eval "$(starship init bash)"
