@@ -64,13 +64,21 @@ ex (){
 }
 
 # if a tmux session exists then attach to that or create a new one
-tx (){
+tx() {
   if ! command -v tmux >/dev/null 2>&1; then
     echo "tmux is not installed."
+    return 1
+  fi
+
+  if [ -n "$TMUX" ]; then
+    echo "Already inside a tmux session."
+    return 0
+  fi
+
+  if tmux has-session 2>/dev/null; then
+    tmux attach-session
   else
-    if [ -z "$TMUX" ]; then
-      tmux attach-session -t $(tmux ls | awk '{print substr($1, 1, 1)}') || tmux new-session
-    fi
+    tmux new-session
   fi
 }
 
