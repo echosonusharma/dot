@@ -83,10 +83,15 @@ tx() {
 }
 
 ### BASH ALIASES
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
+
 alias rs='exec $0'
 alias h='history'
 alias c='clear'
-alias ll='ls -la'
 alias grep='grep --color=auto'
 
 ### GIT ALIASES
