@@ -125,6 +125,9 @@ alias cr='cargo run'
 alias ct='cargo test'
 alias cb='cargo build'
 
+### TOOLS
+alias y='yazi' # file manager
+
 # cargo watch must be installed
 alias cw='cargo watch -x run'
 
