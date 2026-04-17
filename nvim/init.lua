@@ -16,7 +16,7 @@ vim.opt.confirm = true
 vim.opt.linebreak = true
 vim.opt.termguicolors = true
 vim.opt.wildoptions:append { 'fuzzy' }
-vim.opt.path:append { '**' }
+-- vim.opt.path:append { '**' } -- Removed to prevent performance issues in large directories
 vim.opt.smoothscroll = true
 vim.opt.grepprg = 'rg --vimgrep --no-messages --smart-case'
 vim.opt.statusline = '[%n] %<%f %h%w%m%r%=%-14.(%l,%c%V%) %P'
@@ -30,7 +30,7 @@ local function gh(user, name)
 end
 
 vim.pack.add({
-  gh('rebelot', 'kanagawa.nvim'),
+  gh('rose-pine', 'neovim'),
   gh('mikavilpas', 'yazi.nvim'),
   gh('nvim-tree', 'nvim-web-devicons'),
   gh('nvim-treesitter', 'nvim-treesitter'),
@@ -43,16 +43,25 @@ vim.pack.add({
   gh('windwp', 'nvim-autopairs'),
   gh('mbbill', 'undotree'),
   gh('sphamba', 'smear-cursor.nvim'),
+  gh('neovim', 'nvim-lspconfig'),
+  gh('mason-org', 'mason.nvim'),
+  gh('mason-org', 'mason-lspconfig.nvim'),
+  gh('WhoIsSethDaniel', 'mason-tool-installer.nvim'),
+  gh('Saghen', 'blink.cmp'),
 })
 
 -- --- Plugin Configuration ---
 
--- Kanagawa theme
-require('kanagawa').setup({
-  theme = "wave",
-  background = { dark = "wave", light = "lotus" },
+-- Rose Pine theme
+require('rose-pine').setup({
+  variant = 'auto',
+  dark_variant = 'main',
+  extend_background_behind_tabs = true,
 })
-vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme rose-pine")
+
+-- Icons
+require('nvim-web-devicons').setup({})
 
 -- Yazi.nvim (File Explorer)
 require('yazi').setup({
@@ -92,8 +101,8 @@ if ok_tele then
 
   -- Keymaps
   local builtin = require('telescope.builtin')
-  vim.keymap.set('n', '<leader>ff', function() builtin.find_files({ cwd = vim.fn.getcwd() }) end, { desc = 'Telescope find files' })
-  vim.keymap.set('n', '<leader>fg', function() builtin.live_grep({ cwd = vim.fn.getcwd() }) end, { desc = 'Telescope live grep' })
+  vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+  vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
   vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
   vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 end
@@ -102,22 +111,51 @@ end
 local ok_ts, ts = pcall(require, 'nvim-treesitter.configs')
 if ok_ts then
   ts.setup({
-    ensure_installed = { "lua", "go", "javascript", "typescript", "c", "cpp" },
+    ensure_installed = { "lua", "go", "javascript", "typescript", "c", "cpp", "markdown", "markdown_inline" },
     highlight = { enable = true },
   })
 end
 
 -- --- LSP & IDE Features ---
+vim.opt.completeopt:append("noselect")
+
+-- Mason Setup
+require('mason').setup()
+require('mason-lspconfig').setup()
+require('mason-tool-installer').setup({
+  ensure_installed = {
+    "lua_ls",
+    "stylua",
+    "gopls",
+    "typescript-language-server",
+    "clangd",
+  }
+})
+
+-- Blink.cmp Setup
+require("blink.cmp").setup({
+  signature = { enabled = true },
+  completion = {
+    documentation = { auto_show = true, auto_show_delay_ms = 500 },
+    menu = {
+      auto_show = true,
+      draw = {
+        treesitter = { "lsp" },
+        columns = { { "kind_icon", "label", "label_description", gap = 1 }, { "kind" } },
+      },
+    },
+  },
+})
 
 -- Global attachment logic
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local bufnr = args.buf
     local opts = { buffer = bufnr, silent = true }
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
 
-    -- Enable completion
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    
+    -- Completion handled by blink.cmp (Native 0.11/0.12 API used by plugin)
+
     -- Navigation
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
@@ -133,13 +171,31 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
--- Install language servers
--- Golang - go install golang.org/x/tools/gopls@latest
--- Typescript - npm i -g typescript typescript-language-server
--- C/C++ - sudo apt install clangd
+-- Configure lua_ls (Neovim 0.11+ config API)
+vim.lsp.config('lua_ls', {
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        globals = {
+          'vim',
+          'require'
+        },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+})
 
 -- Enable servers
-vim.lsp.enable({ 'gopls', 'ts_ls', 'clangd' })
+vim.lsp.enable({ 'lua_ls', 'gopls', 'ts_ls', 'clangd' })
 
 -- Configure diagnostic display
 vim.diagnostic.config({
@@ -148,22 +204,6 @@ vim.diagnostic.config({
   underline = true,
   severity_sort = true,
   float = { border = 'rounded' },
-})
-
--- Auto-completion triggering while typing
-vim.api.nvim_create_autocmd("InsertCharPre", {
-  callback = function()
-    -- Skip if in Telescope prompt or if omnifunc isn't set
-    if vim.bo.filetype == 'TelescopePrompt' or vim.bo.omnifunc == "" then
-      return
-    end
-
-    if vim.fn.pumvisible() == 0 and vim.v.char:match("[%w%.%/]") then
-      vim.schedule(function()
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-x><C-o>", true, false, true), "n", true)
-      end)
-    end
-  end,
 })
 
 -- --- Floating Terminal ---
@@ -217,6 +257,7 @@ local function toggle_terminal()
     vim.cmd('startinsert')
   else
     vim.api.nvim_win_hide(state.floating.win)
+    state.floating.win = -1
   end
 end
 
