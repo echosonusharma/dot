@@ -2,19 +2,22 @@
 
 **Prefix:** `Ctrl + j` or `Ctrl + f`
 
-### Panes
+> Panes
+
 - `v` / `h` - Vertical / Horizontal split
 - `Ctrl + Arrows` - Navigate (No prefix)
 - `x` - Kill pane
 
-### Windows
+> Windows
+
 - `c` - New window
 - `Shift + Arrows` - Switch windows
 - `Ctrl + Shift + Arrows` - Reorder windows
 - `,` - Rename window
 - `&` - Kill window
 
-### Sessions
+> Sessions
+
 - `tmux` - New session
 - `tmux ls` - List sessions
 - `tmux a` - Attach latest
@@ -22,10 +25,10 @@
 - `$` - Rename current session
 - `s` - Switch session
 
-### Misc
+> Misc
+
 - `r` - Reload config
 - `[` - Copy mode (`v` to select, `y` to copy)
 - `p` - Paste
 - `y` - Sync panes
 - `d` - Detach session
-
