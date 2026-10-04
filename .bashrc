@@ -63,7 +63,7 @@ ex (){
   fi
 }
 
-# if a tmux session exists then attach to that or create a new one
+# tmux handler
 tx() {
   if ! command -v tmux >/dev/null 2>&1; then
     echo "tmux is not installed."
@@ -82,19 +82,48 @@ tx() {
   fi
 }
 
-### BASH ALIASES
-alias ls='lsd'
-alias l='ls -l'
-alias la='ls -a'
-alias lla='ls -la'
-alias lt='ls --tree'
+# kill ports
+kill_port() {
+  if [ -z "$1" ]; then
+    echo "Usage: kill_port <port_number>"
+    return 1
+  fi
+  port=$1
+  pid=$(sudo lsof -t -i :"$port")
+  if [ -n "$pid" ]; then
+    sudo kill -9 "$pid"
+    echo "Process on port $port (PID: $pid) has been killed."
+  else
+    echo "No process found on port $port."
+  fi
+}
+
+
+# get git commit logs from a specif tag
+gd() {
+    git log --pretty=format:"%h: %s" $1..@
+}
+
+
+# ls aliases
+alias ls='exa --icons'
+alias ll='exa -alF --icons --git'
+alias l='exa -l --icons'
+alias la='exa -a --icons'
+alias lla='exa -la --icons'
+alias lt='exa --tree --icons'
+
+alias f='yazi'
+alias v='nvim'
 
 alias rs='exec $0'
 alias h='history'
 alias c='clear'
 alias grep='grep --color=auto'
 
-### GIT ALIASES
+alias cl='claude'
+alias cld='claude --dangerously-skip-permissions'
+
 alias gl='git log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short'
 alias gb='git branch'
 alias gr='git remote'
@@ -107,32 +136,22 @@ alias gck='git checkout'
 alias gsw='git switch'
 alias gpl='git pull'
 
-### NPM ALIASES
 alias nit='npm init'
 alias ni='npm install'
 alias nu='npm uninstall'
 alias nr='npm run'
 
-### YARN ALIASES
-alias yit='yarn init'
-alias yi='yarn install'
-alias ya='yarn add'
-alias yr='yarn remove'
 
-### CARGO ALIASES
-alias cn='cargo new'
-alias cr='cargo run'
-alias ct='cargo test'
-alias cb='cargo build'
+p1() {
+  git config --global user.email "work@work.com"
+  git config --global user.name "sonu sharma"
+  echo "Git: sonu sharma <work@work.com>"
+}
 
-### TOOLS
-alias y='yazi' # file manager
-
-# cargo watch must be installed
-alias cw='cargo watch -x run'
-
+p2() {
+  git config --global user.email "mail@mail.com"
+  git config --global user.name "sonu sharma"
+  echo "Git: sonu sharma <mail@mail.com>"
+}
 # RUN FADE SCRIPT
 sh ~/fade
-
-### SETTING THE STARSHIP PROMPT 
-eval "$(starship init bash)"
