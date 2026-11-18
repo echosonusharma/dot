@@ -44,8 +44,7 @@ Connectors (Jira, Slack, …) and service CLIs (`aws`, `kubectl`, `gh`, …):
 ## Git
 
 - Conventional commits (`feat:`, `fix:`, `chore:` …), subject ≤ 50 chars, imperative.
-- One-line commit messages. No body, no `Co-Authored-By`, no mention of Claude or any AI agent.
-- Personal repos (`~/personal/`): commit as `sonu sharma <echosonusharma@gmail.com>`.
+- One-line commit messages. No body, unless needed. no `Co-Authored-By`, no mention of Claude or any AI agent.
 - Atomic commits: code + tests + docs together. Branch before the first commit on someone else's repo.
 
 ## Secrets
