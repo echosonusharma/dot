@@ -1,5 +1,14 @@
 # Claude Code config
 
+## .claude/CLAUDE.md
+
+Global instructions loaded in every Claude Code session (workflow, safety gates, shell, connectors,
+code and git conventions). Project CLAUDE.md files override it. Symlinked into place:
+
+```sh
+ln -s ~/personal/dot/claude/.claude/CLAUDE.md ~/.claude/CLAUDE.md
+```
+
 ## .claude/settings.json
 
 Model `opus`, effort `high`, dark theme, plugins (caveman, frontend-design, gopls + rust-analyzer LSP).
